@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: survey
+    ports:
+      - "5432:5432"
+
+  node-app:
+    image: node:18-alpine
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://root:root@postgres:5432/
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: npm run start:dev
+    depends_on:
+      - postgres
