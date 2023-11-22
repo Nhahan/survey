@@ -5,6 +5,8 @@ import { RegisterQuestionRequest } from '../dto/request/register-question.reques
 import { QuestionService } from '../service/question.service';
 import { RegisterOptionRequest } from '../dto/request/register-option.request';
 import { OptionService } from '../service/option.service';
+import { RegisterAnswerRequest } from '../dto/request/register-answer.request';
+import { AnswerService } from '../service/answer.service';
 
 @AutoInjectable()
 export class SurveyFacade {
@@ -12,6 +14,7 @@ export class SurveyFacade {
     private readonly surveyService: SurveyService,
     private readonly questionService: QuestionService,
     private readonly optionService: OptionService,
+    private readonly answerService: AnswerService,
   ) {}
 
   registerSurvey(request: RegisterSurveyRequest) {
@@ -26,5 +29,11 @@ export class SurveyFacade {
   async registerOption(request: RegisterOptionRequest) {
     const question = await this.questionService.findQuestion(request.questionId);
     return this.optionService.save(request, question);
+  }
+
+  async registerAnswer(request: RegisterAnswerRequest) {
+    const question = await this.questionService.findQuestion(request.questionId);
+    const option = await this.optionService.findOption(request.optionId);
+    return await this.answerService.save(question, option);
   }
 }

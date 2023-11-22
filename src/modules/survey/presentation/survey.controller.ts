@@ -4,6 +4,8 @@ import { ResponseEntity } from '../../../common/response';
 import { SurveyFacade } from '../facade/survey.facade';
 import { RegisterSurveyRequest } from '../dto/request/register-survey.request';
 import { RegisterQuestionRequest } from '../dto/request/register-question.request';
+import { RegisterOptionRequest } from '../dto/request/register-option.request';
+import { RegisterAnswerRequest } from '../dto/request/register-answer.request';
 
 @AutoController('surveys')
 export class DeviceController {
@@ -15,9 +17,21 @@ export class DeviceController {
     return ResponseEntity.builder().setData(data).build();
   }
 
-  @Post('question')
+  @Post('questions')
   async registerQuestion(@Body() request: RegisterQuestionRequest) {
     const data = await this.surveyFacade.registerQuestion(request);
+    return ResponseEntity.builder().setData(data).build();
+  }
+
+  @Post('questions/options')
+  async registerOption(@Body() request: RegisterOptionRequest) {
+    const data = await this.surveyFacade.registerOption(request);
+    return ResponseEntity.builder().setData(data).build();
+  }
+
+  @Post('questions/options/answers')
+  async registerAnswer(@Body() request: RegisterAnswerRequest) {
+    const data = await this.surveyFacade.registerAnswer(request);
     return ResponseEntity.builder().setData(data).build();
   }
 }

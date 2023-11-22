@@ -10,4 +10,11 @@ export class Answer extends BaseEntity {
 
   @ManyToOne(() => Option)
   option: Option;
+
+  static fromRegisterAnswerRequest(question: Question, option: Option) {
+    const answer = new Answer();
+    answer.question = question;
+    answer.option = option;
+    return answer;
+  }
 }
