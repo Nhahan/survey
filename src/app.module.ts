@@ -3,7 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from './common/logger/logger.module';
 import appConfig from './configs/app.config';
 import typeOrmConfig, { TypeOrmModules } from './configs/typeorm.config';
+import { ComponentScan } from '@tiny-nestjs/auto-injectable';
 
+@ComponentScan()
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -12,7 +14,8 @@ import typeOrmConfig, { TypeOrmModules } from './configs/typeorm.config';
       load: [typeOrmConfig, appConfig],
     }),
     LoggerModule.forRoot(),
-    ...TypeOrmModules,],
+    ...TypeOrmModules,
+  ],
   providers: [],
 })
 export class AppModule {}

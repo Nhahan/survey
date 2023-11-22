@@ -9,7 +9,7 @@ import { RegisterAnswerRequest } from '../dto/request/register-answer.request';
 import { Deprecated } from '../../../common/deprecated.decorator';
 
 @AutoController('surveys')
-export class DeviceController {
+export class SurveyController {
   constructor(private readonly surveyFacade: SurveyFacade) {}
 
   @Get(':id')
