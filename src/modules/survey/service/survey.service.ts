@@ -2,6 +2,7 @@ import { AutoInjectable } from '@tiny-nestjs/auto-injectable';
 import { SurveyRepository } from '../repository/survey.repository';
 import { Survey } from '../entity/survey.entity';
 import { RegisterSurveyRequest } from '../dto/request/register-survey.request';
+import { BadRequestException } from '@nestjs/common';
 
 @AutoInjectable()
 export class SurveyService {
@@ -12,7 +13,11 @@ export class SurveyService {
     return this.surveyRepository.saveSurvey(survey);
   }
 
-  findSurvey(id: number) {
-    return this.surveyRepository.findSurveyById(id);
+  async findSurvey(id: number) {
+    const survey = await this.surveyRepository.findSurveyById(id);
+    if (!survey) {
+      throw new BadRequestException('Survey not found');
+    }
+    return survey;
   }
 }

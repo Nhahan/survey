@@ -3,6 +3,7 @@ import { RegisterQuestionRequest } from '../dto/request/register-question.reques
 import { QuestionRepository } from '../repository/question.repository';
 import { Question } from '../entity/question.entity';
 import { Survey } from '../entity/survey.entity';
+import { BadRequestException } from '@nestjs/common';
 
 @AutoInjectable()
 export class QuestionService {
@@ -11,5 +12,13 @@ export class QuestionService {
   save(request: RegisterQuestionRequest, survey: Survey) {
     const question = Question.fromRegisterQuestionRequest(request, survey);
     return this.questionRepository.saveQuestion(question);
+  }
+
+  async findQuestion(id: number) {
+    const question = await this.questionRepository.findQuestionById(id);
+    if (!question) {
+      throw new BadRequestException('Question not found');
+    }
+    return question;
   }
 }

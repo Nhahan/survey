@@ -7,4 +7,8 @@ export class QuestionRepository extends Repository<Question> {
   saveQuestion(question: Question) {
     return this.save(question);
   }
+
+  async findQuestionById(id: number) {
+    return this.findOne({ where: { id } });
+  }
 }
