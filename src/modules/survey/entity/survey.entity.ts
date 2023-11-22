@@ -5,4 +5,7 @@ import { BaseEntity } from '../../../common/orm/base.entity';
 export class Survey extends BaseEntity {
   @Column()
   title: string;
+
+  @Column()
+  description: string;
 }

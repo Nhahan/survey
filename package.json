@@ -23,17 +23,17 @@
     "@nestjs/common": "9.0.5",
     "@nestjs/config": "2.3.4",
     "@nestjs/core": "9.0.5",
+    "@nestjs/graphql": "^10.0.11",
     "@nestjs/platform-express": "9.0.0",
     "@nestjs/typeorm": "9.0.1",
     "@tiny-nestjs/auto-injectable": "^0.3.1",
-    "@nestjs/graphql": "^10.0.11",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "graphql": "^16.8.1",
+    "pg": "^8.11.3",
     "pino": "^8.16.2",
     "pino-pretty": "^10.2.3",
-    "rxjs": "^7.8.1",
-    "graphql": "^16.8.1",
-    "pg": "^8.11.3"
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
     "@nestjs/cli": "9.0.0",
