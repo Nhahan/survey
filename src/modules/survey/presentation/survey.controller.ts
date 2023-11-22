@@ -1,5 +1,5 @@
 import { AutoController } from '@tiny-nestjs/auto-injectable';
-import { Body, Post } from '@nestjs/common';
+import { Body, Get, Param, Post } from '@nestjs/common';
 import { ResponseEntity } from '../../../common/response';
 import { SurveyFacade } from '../facade/survey.facade';
 import { RegisterSurveyRequest } from '../dto/request/register-survey.request';
@@ -10,6 +10,12 @@ import { RegisterAnswerRequest } from '../dto/request/register-answer.request';
 @AutoController('surveys')
 export class DeviceController {
   constructor(private readonly surveyFacade: SurveyFacade) {}
+
+  @Get(':id')
+  async getSurvey(@Param('id') id: number) {
+    const data = await this.surveyFacade.getSurvey(id);
+    return ResponseEntity.builder().setData(data).build();
+  }
 
   @Post()
   async registerSurvey(@Body() request: RegisterSurveyRequest) {

@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Question } from '../entity/question.entity';
 import { SQL_ERROR } from '../../../common/error/error.constant';
 import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
+import { Survey } from '../entity/survey.entity';
 
 @CustomRepository({ entity: Question })
 export class QuestionRepository extends Repository<Question> {
@@ -19,5 +20,12 @@ export class QuestionRepository extends Repository<Question> {
 
   async findQuestionById(id: number) {
     return this.findOne({ where: { id } });
+  }
+
+  findQuestionsWithAnswers(survey: Survey): Promise<Question[]> {
+    return this.find({
+      where: { survey: survey },
+      relations: ['options'],
+    });
   }
 }

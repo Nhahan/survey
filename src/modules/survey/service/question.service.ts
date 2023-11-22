@@ -21,4 +21,7 @@ export class QuestionService {
     }
     return question;
   }
+  findQuestionsWithAnswers(survey: Survey) {
+    return this.questionRepository.findQuestionsWithAnswers(survey);
+  }
 }

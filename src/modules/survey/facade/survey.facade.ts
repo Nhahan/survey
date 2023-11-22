@@ -7,6 +7,7 @@ import { RegisterOptionRequest } from '../dto/request/register-option.request';
 import { OptionService } from '../service/option.service';
 import { RegisterAnswerRequest } from '../dto/request/register-answer.request';
 import { AnswerService } from '../service/answer.service';
+import { SurveyResponse } from '../dto/response/survey.response';
 
 @AutoInjectable()
 export class SurveyFacade {
@@ -35,5 +36,11 @@ export class SurveyFacade {
     const question = await this.questionService.findQuestion(request.questionId);
     const option = await this.optionService.findOption(request.optionId);
     return await this.answerService.save(question, option);
+  }
+
+  async getSurvey(id: number) {
+    const survey = await this.surveyService.findSurvey(id);
+    const questionsWithAnswers = await this.questionService.findQuestionsWithAnswers(survey);
+    return SurveyResponse.from(survey, questionsWithAnswers);
   }
 }
