@@ -9,4 +9,7 @@ export class SurveyResult extends BaseEntity {
 
   @Column({ nullable: false })
   userIp: string;
+
+  @Column({ nullable: false })
+  totalScore: number;
 }

@@ -11,4 +11,8 @@ export class SurveyService {
     const survey = Survey.fromRegisterSurveyRequest(request);
     return this.surveyRepository.saveSurvey(survey);
   }
+
+  findSurvey(id: number) {
+    return this.surveyRepository.findSurveyById(id);
+  }
 }

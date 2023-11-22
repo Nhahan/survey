@@ -7,4 +7,8 @@ export class SurveyRepository extends Repository<Survey> {
   saveSurvey(survey: Survey) {
     return this.save(survey);
   }
+
+  findSurveyById(id: number) {
+    return this.findOne({ where: { id } });
+  }
 }
