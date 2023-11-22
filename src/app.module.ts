@@ -1,17 +1,18 @@
-import {Module} from '@nestjs/common';
-import {ConfigModule, ConfigService} from '@nestjs/config';
-import {AppController} from './app.controller';
-import {AppService} from './app.service';
-import {LoggerModule} from './common/logger/logger.module';
-import {TypeOrmModule} from "@nestjs/typeorm";
-import { ormConfig } from './configs/orm.config';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { LoggerModule } from './common/logger/logger.module';
+import appConfig from './configs/app.config';
+import typeOrmConfig, { TypeOrmModules } from './configs/typeorm.config';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), LoggerModule.forRoot(), TypeOrmModule.forRootAsync({
-    inject: [ConfigService],
-    useFactory: (configService: ConfigService) => ormConfig(configService),
-  }),],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+      load: [typeOrmConfig, appConfig],
+    }),
+    LoggerModule.forRoot(),
+    ...TypeOrmModules,],
+  providers: [],
 })
 export class AppModule {}
