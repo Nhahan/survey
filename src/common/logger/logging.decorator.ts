@@ -15,11 +15,11 @@ export function Logging(): MethodDecorator {
 
 function logAction(level: LogLevel, message: string, context: any, stack: any) {
   const fixedLevel = level === 'log' ? 'info' : level;
-  const log = `[${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}] [${fixedLevel}] ${JSON.stringify({
+  const log = `[${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}] [${fixedLevel}] ${{
     message,
     ...(context && { context }),
     ...(stack && { stack }),
-  })}`;
+  }}`;
 
   // todo: log 저장 로직 추가
 }
