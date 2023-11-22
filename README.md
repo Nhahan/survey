@@ -77,3 +77,8 @@ docker-compose up
 ### Survey 결과 단건 조회
 
 #### GET: http://localhost:4000/survey-results/${surveyResultId}
+
+## ERD
+
+<img width="359" alt="image" src="https://github.com/Nhahan/survey/assets/81916648/39c5c056-2d97-46e1-ace7-e560220d699d">
+
