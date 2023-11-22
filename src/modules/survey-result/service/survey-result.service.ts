@@ -3,13 +3,18 @@ import { SurveyResultRepository } from '../repository/survey-result.repository';
 import { SurveyResult } from '../entity/survey-result.entity';
 import { SurveyResultResponse } from '../dto/survey-result.request';
 import { Survey } from '../../survey/entity/survey.entity';
+import { BadRequestException } from '@nestjs/common';
 
 @AutoInjectable()
 export class SurveyResultService {
   constructor(private readonly surveyResultRepository: SurveyResultRepository) {}
 
-  findSurveyResult(id: number) {
-    return this.surveyResultRepository.findSurveyResultById(id);
+  async findSurveyResult(id: number) {
+    const surveyResult = await this.surveyResultRepository.findSurveyResultById(id);
+    if (!surveyResult) {
+      throw new BadRequestException('Survey Result not found');
+    }
+    return surveyResult;
   }
 
   save(request: SurveyResultResponse, survey: Survey) {

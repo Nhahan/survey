@@ -11,6 +11,7 @@ import { QuestionRepository } from '../modules/survey/repository/question.reposi
 import { OptionRepository } from '../modules/survey/repository/option.repository';
 import { Option } from '../modules/survey/entity/option.entity';
 import { AnswerRepository } from '../modules/survey/repository/answer.repository';
+import { SurveyResultRepository } from '../modules/survey-result/repository/survey-result.repository';
 
 export default registerAs('typeorm', () => ({
   type: 'postgres',
@@ -33,5 +34,11 @@ export const TypeOrmModules: DynamicModule[] = [
     inject: [ConfigService],
   }),
   TypeOrmModule.forFeature([Survey, Question, Option, Answer, SurveyResult]),
-  TypeOrmExModule.forCustomRepository([SurveyRepository, QuestionRepository, OptionRepository, AnswerRepository]),
+  TypeOrmExModule.forCustomRepository([
+    SurveyRepository,
+    QuestionRepository,
+    OptionRepository,
+    AnswerRepository,
+    SurveyResultRepository,
+  ]),
 ];
