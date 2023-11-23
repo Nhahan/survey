@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from './common/logger/logger.module';
 import appConfig from './configs/app.config';
-import typeOrmConfig, { TypeOrmModules } from './configs/typeorm.config';
-import { ComponentScan } from '@tiny-nestjs/auto-injectable';
+import typeOrmConfig from './configs/typeorm.config';
+import { SurveyModule } from './modules/survey/survey.module';
+import { SurveyResultModule } from './modules/survey-result/survey-result.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-@ComponentScan()
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -13,8 +14,14 @@ import { ComponentScan } from '@tiny-nestjs/auto-injectable';
       envFilePath: '.env',
       load: [typeOrmConfig, appConfig],
     }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => configService.get('typeorm'),
+      inject: [ConfigService],
+    }),
     LoggerModule.forRoot(),
-    ...TypeOrmModules,
+    SurveyModule,
+    SurveyResultModule,
   ],
   providers: [],
 })

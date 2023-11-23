@@ -1,5 +1,4 @@
-import { AutoController } from '@tiny-nestjs/auto-injectable';
-import { Body, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ResponseEntity } from '../../../common/response';
 import { SurveyFacade } from '../facade/survey.facade';
 import { RegisterSurveyRequest } from '../dto/request/register-survey.request';
@@ -8,7 +7,7 @@ import { RegisterOptionRequest } from '../dto/request/register-option.request';
 import { RegisterAnswerRequest } from '../dto/request/register-answer.request';
 import { Deprecated } from '../../../common/deprecated.decorator';
 
-@AutoController('surveys')
+@Controller('surveys')
 export class SurveyController {
   constructor(private readonly surveyFacade: SurveyFacade) {}
 

@@ -1,4 +1,3 @@
-import { AutoInjectable } from '@tiny-nestjs/auto-injectable';
 import { RegisterSurveyRequest } from '../dto/request/register-survey.request';
 import { SurveyService } from '../service/survey.service';
 import { RegisterQuestionRequest } from '../dto/request/register-question.request';
@@ -8,8 +7,9 @@ import { OptionService } from '../service/option.service';
 import { RegisterAnswerRequest } from '../dto/request/register-answer.request';
 import { AnswerService } from '../service/answer.service';
 import { SurveyResponse } from '../dto/response/survey.response';
+import { Injectable } from '@nestjs/common';
 
-@AutoInjectable()
+@Injectable()
 export class SurveyFacade {
   constructor(
     private readonly surveyService: SurveyService,

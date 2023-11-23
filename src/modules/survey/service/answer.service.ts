@@ -1,11 +1,10 @@
-import { AutoInjectable } from '@tiny-nestjs/auto-injectable';
 import { Option } from '../entity/option.entity';
 import { Question } from '../entity/question.entity';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Answer } from '../entity/answer.entity';
 import { AnswerRepository } from '../repository/answer.repository';
 
-@AutoInjectable()
+@Injectable()
 export class AnswerService {
   constructor(private readonly answerRepository: AnswerRepository) {}
 

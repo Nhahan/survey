@@ -1,9 +1,9 @@
-import { AutoInjectable } from '@tiny-nestjs/auto-injectable';
 import { SurveyService } from '../../survey/service/survey.service';
 import { SurveyResultResponse } from '../dto/survey-result.request';
 import { SurveyResultService } from '../service/survey-result.service';
+import { Injectable } from '@nestjs/common';
 
-@AutoInjectable()
+@Injectable()
 export class SurveyResultFacade {
   constructor(
     private readonly surveyService: SurveyService,

@@ -1,11 +1,10 @@
-import { AutoController } from '@tiny-nestjs/auto-injectable';
-import { Body, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ResponseEntity } from '../../../common/response';
 import { SurveyResultResponse } from '../dto/survey-result.request';
 import { SurveyResultFacade } from '../facade/survey-result.facade';
 
-@AutoController('survey-results')
-export class DeviceController {
+@Controller('survey-results')
+export class SurveyResultController {
   constructor(private readonly surveyResultFacade: SurveyResultFacade) {}
 
   @Get('id')

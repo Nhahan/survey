@@ -84,8 +84,6 @@ docker-compose up
 
 ## Features
 
-직접 개발한 [Auto Injectable](https://www.npmjs.com/package/@tiny-nestjs/auto-injectable) 라이브러리를 사용했습니다.
-
 ### Logger
 
 - 필요한 클래스마다 `LoggerService` 주입하는 반복적인 느낌을 좋아하지 않아 Global Logger를 만들어 사용했습니다.
